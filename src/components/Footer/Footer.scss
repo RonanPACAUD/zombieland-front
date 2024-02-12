@@ -1,0 +1,21 @@
+@use '@scssVariables' as v;
+
+.footer {
+    background-color: v.$clr_ultra_dark;
+    color: v.$clr_ultra_light;
+
+    &__container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 7rem;
+        padding: 2rem;
+        max-width: 1920px;
+        margin: auto;
+
+        &-logo {
+            width: 8rem;
+            transform: rotate(-5deg);
+        }
+    }  
+}
