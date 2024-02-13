@@ -1,6 +1,8 @@
 @use "reset";
 @use "variables" as v;
 
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@200..700&family=Permanent+Marker&display=swap');
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -12,3 +14,36 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 }
+
+body {
+  background-color: v.$clr_medium_dark;
+  color: v.$clr_ultra_light;
+  font-family: "Oswald";
+}
+
+h1 {
+  font-family: "Permanent Marker";
+  font-size: 4rem;
+}
+
+h2 {
+  text-transform: uppercase;
+  color: v.$clr-primary;
+  margin: 3rem 0 .8rem 0;
+  font-size: 1.7rem;
+}
+
+h3 {
+  margin: 2rem 0 0.8rem 0;
+}
+
+p {
+  font-size: 1.3rem;
+  margin: 0 0 1.5rem 0;
+}
+
+a {
+  text-decoration: none;
+  color: v.$clr-ultra-light;
+}
+
