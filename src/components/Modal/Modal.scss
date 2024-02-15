@@ -1,0 +1,27 @@
+@use '@scssVariables' as v;
+
+
+.modal {
+    position: fixed;
+    z-index: 100;
+    width: 100vw;
+    height: 100vh;
+    background-color: v.$clr-modal-background;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &__container {
+        width: 30rem;
+        border-radius: 0.5rem;
+        background-color: v.$clr-light-dark;
+        padding: 2rem;
+        text-align: right;
+
+        &__close-button {
+            width: 1.5rem;
+            filter: invert(100%);
+            cursor: pointer;
+        }
+    }
+}

@@ -57,7 +57,7 @@ export default function Contact() {
             </div>
             <button 
                 type='submit' 
-                className='contact__form-section__form__submit-button'
+                className='contact__form-section__form__submit-button btn'
             >
                 Envoyer
             </button>

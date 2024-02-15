@@ -10,6 +10,7 @@ import Bookings from '../Bookings/Bookings';
 
 import './App.scss';
 import Contact from '../Contact/Contact';
+import Modal from '../Modal/Modal';
 
 function App() {
   const dispatch = useDispatch();
@@ -22,6 +23,7 @@ function App() {
   return (
     <div className='app'>
       <Header />
+      <Modal />
       <Routes >
         <Route 
           path="/"
@@ -40,6 +42,7 @@ function App() {
           element={<Contact />}
         />
       </Routes>
+      
      
       <Footer />
     </div>

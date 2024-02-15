@@ -148,7 +148,7 @@ export default function Bookings() {
                             }
                         })}                    
                     </div>
-                    <button type='submit' className='booking-form-submit-button'>Réserver</button>
+                    <button type='submit' className='booking-form-submit-button btn' >Réserver</button>
                 </div>
             </form>
         </div>
