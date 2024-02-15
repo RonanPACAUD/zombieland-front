@@ -2,7 +2,7 @@ import './Bookings.scss';
 
 import { useSelector } from 'react-redux';
 
-import bookingsPicture from '../../assets/booking-assets/Firefly salle de restaurant sombre brouillard brumeux familial eclairage rouge sombre peur 79075.jpg';
+import bookingsPicture from '../../assets/booking-assets/Firefly salle de restaurant sombre brouillard brumeux familial peur lowkey 47898.jpg';
 import underline from '../../assets/underline/dual-underline.png';
 
 import Calendar from 'react-calendar';
@@ -134,6 +134,9 @@ export default function Bookings() {
                         </div>
                     </div>
                 </div>
+                <div className='bookings__book__form__message'>
+                    {bookingMessage}
+                </div>
                 <div className='bookings__book__form__total-submit'>
                     <div className='total'>
                         { priceList.map((price) => {
@@ -146,9 +149,6 @@ export default function Bookings() {
                         })}                    
                     </div>
                     <button type='submit' className='booking-form-submit-button'>Réserver</button>
-                </div>
-                <div className='bookings__book__form__message'>
-                    {bookingMessage}
                 </div>
             </form>
         </div>

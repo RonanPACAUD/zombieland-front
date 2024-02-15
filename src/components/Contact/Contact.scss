@@ -11,13 +11,13 @@
         width: 100%;
         max-height: 100vh;
         object-fit: cover;
-        filter: grayscale(40%);
+        filter: grayscale(10%);
     }
 
     &__main-title {
         position: absolute;
-        left: 10%;
-        top: 35%;
+        left: 15%;
+        top: 40%;
         z-index: 1;
 
         &__underline {
@@ -46,15 +46,22 @@
             &__subject {
                 background-color: v.$clr-ultra-light;
                 margin-bottom: 2rem;
-                padding: 0.5rem;
+                padding: 0.7rem;
                 width: 100%;
             }
 
             &__content {
                 resize: none;
                 height: 20rem;
-                padding: 0.5rem;
+                padding: 0.7rem;
                 width: 100%;
+            }
+
+            &__message {
+                width: 100%;
+                margin-top: 1rem;
+                font-size: 2rem;
+                color: v.$clr-primary;
             }
 
             &__submit-button {
@@ -66,7 +73,7 @@
                 justify-content: center;
                 align-items: center;
                 font-size: 1.5rem;
-                margin-top: 2.5rem;
+                margin-top: 2rem;
             }
         }
     }

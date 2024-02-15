@@ -10,13 +10,13 @@
         width: 100%;
         max-height: 100vh;
         object-fit: cover;
-        filter: grayscale(40%);
+        filter: grayscale(10%);
     }
 
     &__main-title {
         position: absolute;
-        right: 10%;
-        top: 35%;
+        left: 15%;
+        top: 25%;
         z-index: 1;
 
         &__underline {
@@ -73,9 +73,7 @@
             }
 
             &__message {
-                position: absolute;
-                left: 50%;
-                transform: translate(-50%, 0);
+                margin-top: 1rem;
                 font-size: 2rem;
                 color: v.$clr-primary;
             }
@@ -84,7 +82,7 @@
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                margin: 2.5rem 0 1rem 0 ;
+                margin: 2rem 0 1rem 0 ;
             }
         }
 

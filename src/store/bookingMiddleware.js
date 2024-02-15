@@ -1,10 +1,9 @@
 import { changeMessageValue } from "./bookingSlice";
 
 const bookingMiddleware = (store) => (next) => (action) => {
+    const state = store.getState();
     
     if (action.type === 'POST_NEW_BOOKING_TO_API') {
-
-        const state = store.getState();
 
         fetch('http://localhost:3000/booking', {
             method: 'POST',
@@ -22,9 +21,6 @@ const bookingMiddleware = (store) => (next) => (action) => {
         })
             .then((response) => response.json())
             .then((data) => {
-                console.log(data)
-                console.log(data.message);
-                // store.dispatch((data));
                 store.dispatch(changeMessageValue(data.message));
             })
     }
