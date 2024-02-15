@@ -1,0 +1,75 @@
+@use '@scssVariables' as v;
+
+.greeting {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+
+    &__picture {
+        width: 100%;
+        max-height: 100vh;
+        object-fit: cover;
+        filter: grayscale(10%);
+    }
+
+    &__main-title {
+        position: absolute;
+        left: 55%;
+        top: 52%;
+        z-index: 1;
+
+        &__underline {
+            filter: invert(16%) sepia(23%) saturate(4857%) hue-rotate(337deg) brightness(108%) contrast(131%);
+            width: 46rem;
+            transform: rotate(180deg);
+        }
+    }
+
+    &__main-title p {
+        width: 43rem;
+        margin-top: 1.5rem;
+        font-size: 1.5rem; 
+    }
+
+    &__presentation, &__under-presentation{
+        text-align: center;
+        width: 55%;
+        margin: 1rem 0 4rem 0;
+    }
+
+    &__map {
+        background-color: v.$clr-primary;
+        width: 80%;
+        height: 40rem
+    }
+
+    &__practical-info {
+
+        &__info-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+    }
+}
+
+
+
+.location-map-container {
+    margin-left: 2rem;
+}
+
+.location-map {
+    height: 100%;
+    filter: grayscale(100%);
+}
+
+.rate {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+    width: 100%;
+}

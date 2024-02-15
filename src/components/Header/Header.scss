@@ -1,29 +1,29 @@
 @use '@scssVariables' as v;
 
 .header {
-    background-color: v.$clr_ultra_dark;
-    color: v.$clr_ultra_light;
+    background-color: v.$clr-ultra-dark;
+    color: v.$clr-ultra-light;
+    position: fixed;
+    width: 100vw;
+    z-index: 10;
 
     &__container {
         display: flex;
         justify-content: space-between;
         align-items: center;
         height: 7rem;
-        padding: 2rem;
-        max-width: 1920px;
+        padding: 2.5rem;
         margin: auto;
 
-        &-logo {
+        &__logo {
             width: 12rem;
             transform: rotate(-5deg);
         }
     
-        &-nav-link ul {
-            display: flex;
-        }
-    
-        &-nav-link li {
+        &__nav-link  *{
             margin-left: 1.5rem;
+            font-family: "Bebas Neue";
+            font-size: 1.4rem;
         }
     }  
 }
