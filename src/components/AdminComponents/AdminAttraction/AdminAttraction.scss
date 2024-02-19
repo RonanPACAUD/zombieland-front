@@ -1,0 +1,72 @@
+@use '@scssVariables' as v;
+
+.admin-attraction {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5.5rem 0 0 0;
+    text-align: center;
+
+    &__list-container {
+        width: 75%;
+        
+        &__item {
+            display: flex;
+            padding: 1rem 2rem;
+            margin: 0.5rem;
+            width: fit-content;
+            background-color: v.$clr-light-dark;
+            text-align: left;
+            
+            &__left-container {
+                margin-right: 3rem;
+
+
+                &__name {
+                    color: v.$clr-primary;
+                    font-size: 1.5rem;
+                    margin-bottom:0.5rem;
+                }
+
+                &__category {
+                    margin-top: 1rem;
+                }
+
+                &__category span {
+                    color: v.$clr-primary
+                }
+            }
+
+            &__middle-container {
+                width: 25rem;
+                
+                &__pictures {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    height: 100%;
+                }
+            }
+
+            &__right-container {
+
+                &__buttons {
+                    display: flex;
+                    flex-direction: column;
+                }
+    
+                &__buttons * {
+                    background-color: v.$clr-primary;
+                    height: 3rem;
+                    margin: 0.5rem;
+                    width: 6rem;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    cursor: pointer;
+                }
+            }
+           
+        }
+    }
+}

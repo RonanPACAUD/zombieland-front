@@ -1,0 +1,26 @@
+@use '@scssVariables' as v;
+
+.admin-attraction-modal {
+    text-align: center;
+
+    &__form {
+
+        &__description textarea {
+            height: 15rem;
+            resize: none;
+        }
+    }
+
+    &__form * {
+        width: 45rem;
+        text-align: left;
+    }
+}
+
+.admin-attraction-modal h2 {
+    margin: 0;
+}
+
+.admin-attraction-modal h3 {
+    margin: 1rem 0 0.5rem 0;
+}

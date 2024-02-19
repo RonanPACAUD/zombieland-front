@@ -1,0 +1,15 @@
+@use '@scssVariables' as v;
+
+
+.admin-greetings {
+    padding: 5.5rem 0 0 0;
+    text-align: center;
+
+    &__nav-link *{
+        margin: 0 2rem;
+        color: v.$clr-primary;
+        font-size: 1.2rem;
+        text-transform: uppercase;
+    }
+}
+

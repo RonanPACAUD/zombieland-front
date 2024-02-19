@@ -1,0 +1,44 @@
+@use '@scssVariables' as v;
+
+.admin-booking-modal {
+  &__book {
+    &__form-container {
+      margin-bottom: 0.5rem;
+    }
+
+    &__form {
+      text-align: center;
+
+      &__right {
+        text-align: left;
+        margin-left: 4rem;
+      }
+
+      &__hotel input {
+        margin-right: 0.5rem;
+      }
+
+      &__message {
+        margin-top: 1rem;
+        font-size: 2rem;
+        color: v.$clr-primary;
+      }
+
+      &__total-submit {
+        display: flex;
+        justify-content: space-between;
+        align-items: top;
+        margin: 2rem 0 1rem 0;
+      }
+    }
+
+    &__form-container {
+      display: flex;
+    }
+  }
+}
+
+.admin-booking-modal h2 {
+  text-align: center;
+  margin: 0;
+}
