@@ -1,27 +1,16 @@
 import './Attractions.scss';
 
 import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+
 import attractionPicture from '../../assets/attraction-assets/Firefly creepy orageux parc attraction abandonné montagne russe brouillard brume grisaille 37698.jpg';
 import underline from '../../assets/underline/dual-underline.png';
 
 import Attraction from '../Attraction/Attraction';
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-
-
-// function importAll(r) {
-//   let images = {};
-//   r.keys().map(item => { images[item.replace('./', '')] = r(item); });
-//   return images;
-// }
-
-// const images = importAll(require.context('./images', false, '/\.png/'));
-
-
 
 export default function Attractions() {
   const dispatch = useDispatch();
-
 
   const attractionsList = useSelector(
     (state) => state.attraction.attractionsList
@@ -36,14 +25,14 @@ export default function Attractions() {
       <img
         src={attractionPicture}
         alt="Rollercoaster"
-        className="attractions__picture"
+        className="attractions__picture main-picture"
       />
-      <div className="attractions__main-title">
+      <div className="attractions__main-title main-title">
         <h1>Nos Attractions</h1>
         <img
           src={underline}
           alt="underline"
-          className="attractions__main-title__underline"
+          className="attractions__main-title__underline underline"
         />
         <p>
           ZombieLand propose une gamme d'attractions et de manèges à couper le
@@ -58,6 +47,7 @@ export default function Attractions() {
             description={attraction.description}
             category={attraction.category}
             pictures={attraction.pictures}
+            tags={attraction.tags}
           />
         ))}
       </div>

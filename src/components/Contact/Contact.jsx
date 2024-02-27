@@ -4,30 +4,30 @@ import { useDispatch, useSelector } from 'react-redux';
 import contactPicture from '../../assets/contact-assets/dead-encounter-retouche_05.png';
 import underline from '../../assets/underline/dual-underline.png';
 import {
-  changeContentValue,
-  changeSubjectValue,
+  changeInputValue,
 } from '../../store/messageSlice';
 
 export default function Contact() {
   const dispatch = useDispatch();
 
-  const subjectValue = useSelector(
-    (state) => state.message.settings.subjectValue
-  );
-  const contentValue = useSelector(
-    (state) => state.message.settings.contentValue
-  );
-  const contactMessage = useSelector((state) => state.message.settings.message);
+  const inputValue = useSelector((state) => state.message.settings);
+  const connectedUser = useSelector((state) => state.user.connected);
+
+  const connectedId = (connectedUser ? connectedUser.id : 1);
 
   return (
     <div className="contact">
-      <img src={contactPicture} alt="Zombie" className="contact__picture" />
-      <div className="contact__main-title">
+      <img
+        src={contactPicture}
+        alt="Zombie"
+        className="contact__picture main-picture"
+      />
+      <div className="contact__main-title main-title">
         <h1>Contactez-nous</h1>
         <img
           src={underline}
           alt="underline"
-          className="contact__main-title__underline"
+          className="contact__main-title__underline underline"
         />
         <p>
           Des Questions? Contactez-nous pour des informations ou simplement pour
@@ -40,28 +40,31 @@ export default function Contact() {
           className="contact__form-section__form"
           onSubmit={(e) => {
             e.preventDefault();
-            dispatch({ type: 'POST_NEW_MESSAGE_TO_API' });
+            dispatch({
+              type: 'POST_NEW_MESSAGE_TO_API',
+              payload: connectedId,
+            });
           }}
         >
           <input
             type="text"
             className="contact__form-section__form__subject"
             placeholder="Objet"
-            value={subjectValue}
+            value={inputValue.subjectValue}
             onChange={(e) => {
-              dispatch(changeSubjectValue(e.target.value));
+              dispatch(changeInputValue({subjectValue: e.target.value}));
             }}
           />
           <textarea
             className="contact__form-section__form__content"
             placeholder="Des questions, vos impressions, c'est ici."
-            value={contentValue}
+            value={inputValue.contentValue}
             onChange={(e) => {
-              dispatch(changeContentValue(e.target.value));
+              dispatch(changeInputValue({contentValue: e.target.value}));
             }}
           />
           <div className="contact__form-section__form__message">
-            {contactMessage}
+            {inputValue.message}
           </div>
           <button
             type="submit"

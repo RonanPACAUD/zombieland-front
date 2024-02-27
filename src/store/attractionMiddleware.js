@@ -1,6 +1,8 @@
-import { updateAttractionList, updateSelectedAttraction } from './attractionSlice';
+import { changeInputValue, resetAttractionState, updateAttractionList, updateSelectedAttraction } from './attractionSlice';
 
 const attractionMiddleware = (store) => (next) => (action) => {
+  const state = store.getState();
+
 
   if (action.type === 'GET_ALL_ATTRACTIONS') {
     fetch('http://localhost:3000/attraction')
@@ -14,8 +16,32 @@ const attractionMiddleware = (store) => (next) => (action) => {
     fetch(`http://localhost:3000/attraction/${action.payload}`)
       .then((response) => response.json())
       .then((data) => {
-
         store.dispatch(updateSelectedAttraction(data));
+      });
+  }
+
+  if (action.type === 'POST_NEW_ATTRACTION_TO_API') {
+
+    fetch('http://localhost:3000/attraction', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: localStorage.getItem('token'),
+      },
+      body: JSON.stringify({
+        name: state.attraction.settings.name,
+        description: state.attraction.settings.description,
+        category_id: state.attraction.settings.category_id,
+      }),
+    })
+      .then((response) => 
+      {if (response.status === 200) {
+        store.dispatch(resetAttractionState())
+      }
+      return response.json()})
+      .then((data) => {
+        store.dispatch(changeInputValue(data));
+        store.dispatch({ type: 'GET_ALL_ATTRACTIONS' });
       });
   }
 
@@ -24,6 +50,7 @@ const attractionMiddleware = (store) => (next) => (action) => {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: localStorage.getItem('token'),
       },
       body: JSON.stringify({
         name: action.payload.name,
@@ -33,8 +60,22 @@ const attractionMiddleware = (store) => (next) => (action) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data)
         store.dispatch(updateSelectedAttraction(data));
+        store.dispatch({ type: 'GET_ALL_ATTRACTIONS' });
+      });
+  }
+
+  if (action.type === 'DELETE_ATTRACTION') {
+    fetch(`http://localhost:3000/attraction/${action.payload}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: localStorage.getItem('token'),
+      },
+    })
+      .then((response) => response.json())
+      .then(() => {
+        store.dispatch({ type: 'GET_ALL_ATTRACTIONS' });
       });
   }
 

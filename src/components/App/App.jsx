@@ -1,6 +1,6 @@
 import './App.scss';
 
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -16,15 +16,34 @@ import Modal from '../Modal/Modal';
 import AdminBookings from '../AdminComponents/AdminBooking/AdminBooking';
 import AdminMessage from '../AdminComponents/AdminMessage/AdminMessage';
 import AdminAttraction from '../AdminComponents/AdminAttraction/AdminAttraction';
+import AdminTagCategory from '../AdminComponents/AdminTagCategory/AdminTagCategory';
+import AdminPrice from '../AdminComponents/AdminPrice/AdminPrice';
+import AdminUser from '../AdminComponents/AdminUser/AdminUser';
+import Profil from '../Profil/Profil';
+import { updateConnectedUser } from '../../store/userSlice';
 
 function App() {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch({ type: 'GET_PRICES_FROM_API' });
-  }, []);
-
   const mainModalIsOpen = useSelector((state) => state.modal.mainModalIsOpen);
+
+
+  const localUser = JSON.parse(localStorage.getItem("connectedUser"))
+
+  
+  const currentPage = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [currentPage]);
+
+    useEffect(() => {
+      if (localUser) {
+        dispatch(updateConnectedUser(localUser))
+      }
+      window.scrollTo(0, 0)
+    }, []);
+
+
 
   return (
     <div className="app">
@@ -36,16 +55,19 @@ function App() {
         <Route path="/attractions" element={<Attractions />} />
         <Route path="/bookings" element={<Bookings />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/profil" element={<Profil />} />
         <Route path="/admin" element={<Admin />}>
-          {/* Gerer les nested Route    */}
+          <Route index element={<AdminBookings />} />
+          <Route path="/admin/admin-booking" element={<AdminBookings />} />
+          <Route path="/admin/admin-message" element={<AdminMessage />} />
+          <Route path="/admin/admin-attraction" element={<AdminAttraction />} />
+          <Route path="/admin/admin-user" element={<AdminUser />} />
+          <Route
+            path="/admin/admin-tag-category"
+            element={<AdminTagCategory />}
+          />
+          <Route path="/admin/admin-price" element={<AdminPrice />} />
         </Route>
-
-        <Route path="/admin-booking" element={<AdminBookings />} />
-        <Route path="/admin-message" element={<AdminMessage />} />
-        <Route path="/admin-attraction" element={<AdminAttraction />} />
-        <Route path="/admin-category" element={<AdminMessage />} />
-        <Route path="/admin-tag" element={<AdminMessage />} />
-        <Route path="/admin-price" element={<AdminMessage />} />
       </Routes>
 
       <Footer />

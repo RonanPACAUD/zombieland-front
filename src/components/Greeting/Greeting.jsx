@@ -1,22 +1,32 @@
 import './Greeting.scss';
 
 import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+
 import greetingPicture from '../../assets/greeting-assets/dead-encounter-retouche_03.png';
+import parkMap from '../../assets/greeting-assets/parkMap.jpg'
 import locationMap from '../../assets/map/image.png';
 import underline from '../../assets/underline/dual-underline.png';
 
 export default function Greeting() {
+  const dispatch = useDispatch();
+  
   const priceList = useSelector((state) => state.price.priceList);
+
+  useEffect(() => {
+    dispatch({ type: 'GET_PRICES_FROM_API' });
+  }, [])
 
   return (
     <div className="greeting">
-      <img src={greetingPicture} alt="Zombie" className="greeting__picture" />
-      <div className="greeting__main-title">
+      <img src={greetingPicture} alt="Zombie" className="greeting__picture main-picture"></img>
+      <div className="greeting__main-title main-title">
         <h1>Bienvenue à ZombieLand</h1>
         <img
           src={underline}
           alt="underline"
-          className="greeting__main-title__underline"
+          className="greeting__main-title__underline underline"
         />
         <p>
           ZombieLand est bien plus qu'un simple parc d'attractions, c'est une
@@ -51,7 +61,9 @@ export default function Greeting() {
           visite.
         </p>
       </div>
-      <div className="greeting__map">Preview map</div>
+
+        <img src={parkMap} className="greeting__park-map"/>
+      
       <div className="greeting__under-presentation">
         <div className="greeting__security">
           <h2>Sécurité Avant Tout</h2>
@@ -68,7 +80,7 @@ export default function Greeting() {
         <div className="greeting__practical-info">
           <h2>Infos Pratiques</h2>
           <div className="greeting__practical-info__info-container">
-            <div className="opening-location">
+            <div className="greeting__practical-info__info-container__opening-location">
               <h3>Horaires d'ouverture</h3>
               Le parc est ouvert tous les jours, du lundi au dimanche, de 9h à
               18h
@@ -81,7 +93,7 @@ export default function Greeting() {
               Seine-et Marne
               <br />
               <h3>Tarifs</h3>
-              <div className="rate">
+              <div className="greeting__practical-info__info-container__opening-location__rate">
                 <div className="without-hotel">
                   {priceList.map((price) => {
                     if (price.hotel === false) {
@@ -93,7 +105,7 @@ export default function Greeting() {
                     }
                   })}
                 </div>
-                <div className="whith-hotel">
+                <div className="with-hotel">
                   Avec hotel le prix est de :<br />
                   {priceList.map((price) => {
                     if (price.hotel === true) {
@@ -108,11 +120,11 @@ export default function Greeting() {
                 </div>
               </div>
             </div>
-            <div className="location-map-container">
+            <div className="greeting__practical-info__info-container__location-map-container">
               <img
                 src={locationMap}
                 alt="Map Location"
-                className="location-map"
+                className="greeting__practical-info__info-container__location-map-container__location-map"
               />
             </div>
           </div>

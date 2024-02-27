@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import Inscription from '../Inscription/Inscription';
 import AdminBookingModal from '../AdminComponents/AdminBookingModal/AdminBookingModal';
 import AdminAttractionModal from '../AdminComponents/AdminAttractionModal/AdminAttractionModal';
+import AdminUserModal from '../AdminComponents/AdminUserModal/AdminUserModal';
+import ProfileModal from '../ProfileModal/ProfileModal';
 
 export default function Modal() {
   const dispatch = useDispatch();
@@ -23,6 +25,10 @@ export default function Modal() {
   const adminAttractionModal = useSelector(
     (state) => state.modal.adminAttractionModal
   );
+  const adminUserModal = useSelector(
+    (state) => state.modal.adminUserModal
+  );
+  const modifyProfilModal =useSelector((state) => state.modal.modifyProfilModal);
 
   return (
     <div
@@ -44,6 +50,8 @@ export default function Modal() {
         {inscriptionModalIsOpen && <Inscription />}
         {adminBookingModal && <AdminBookingModal />}
         {adminAttractionModal && <AdminAttractionModal />}
+        {adminUserModal && <AdminUserModal />}
+        {modifyProfilModal && <ProfileModal />}
       </div>
     </div>
   );

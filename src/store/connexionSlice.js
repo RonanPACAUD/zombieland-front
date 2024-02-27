@@ -41,10 +41,22 @@ const connexionSlice = createSlice({
         },
       };
     },
+
+    resetConnexionState: (state) => {
+      return {
+        ...state,
+        settings: {
+          ...state.settings,
+          emailValue: '',
+          passwordValue: '',
+          message: '',
+        },
+      };
+    },
   },
 });
 
-export const { changeEmailValue, changePasswordValue, changeMessageValue } =
+export const { changeEmailValue, changePasswordValue, changeMessageValue, resetConnexionState } =
   connexionSlice.actions;
 
 export default connexionSlice.reducer;

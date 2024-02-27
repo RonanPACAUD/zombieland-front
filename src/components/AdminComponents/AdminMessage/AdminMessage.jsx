@@ -10,7 +10,7 @@ export default function AdminMessage() {
 
   useEffect(() => {
     dispatch({ type: 'GET_ALL_MESSAGES' });
-  }, [messagesList]);
+  }, []);
 
   return (
     <div className="admin-message">

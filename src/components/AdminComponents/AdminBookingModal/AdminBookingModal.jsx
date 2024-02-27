@@ -7,8 +7,8 @@ import 'react-calendar/dist/Calendar.css';
 
 import dayjs from 'dayjs';
 import 'dayjs/locale/fr';
+import { changeInputValue } from '../../../store/bookingSlice';
 import { useEffect } from 'react';
-import { updateSelectedBooking } from '../../../store/bookingSlice';
 
 dayjs.locale('fr');
 
@@ -16,14 +16,28 @@ export default function AdminBookingModal() {
   const dispatch = useDispatch();
 
   const priceList = useSelector((state) => state.price.priceList);
-
+  const inputValue = useSelector((state) => state.booking.settings);
   const selectedBookingValues = useSelector((state) => state.booking.selected);
 
-  // useEffect(() => {
-  //   dispatch(updateSelectedBooking())
-  // }, [selectedBookingValues])
+  useEffect(() => {
+    calculTotal();
+  }, [
+    selectedBookingValues.durationValue,
+    selectedBookingValues.hotelValue,
+    selectedBookingValues.ticketValue,
+  ]);
 
-  console.log('prout');
+  function calculTotal() {
+    priceList.forEach((price) => {
+      if (
+        selectedBookingValues.hotelValue === price.hotel &&
+        parseInt(selectedBookingValues.durationValue) === price.duration
+      ) {
+        const total = price.price * selectedBookingValues.ticketValue;
+        dispatch(changeInputValue({ totalValue: total }));
+      }
+    });
+  }
 
   return (
     <div className="admin-booking-modal">
@@ -78,7 +92,7 @@ export default function AdminBookingModal() {
                     type="radio"
                     name="select-hotel"
                     id="select-with-hotel"
-                    defaultChecked={!selectedBookingValues.hotelValue}
+                    checked={!selectedBookingValues.hotelValue}
                     onChange={() => {
                       dispatch({
                         type: 'MODIFY_BOOKING_TO_API',
@@ -95,7 +109,7 @@ export default function AdminBookingModal() {
                   <input
                     type="radio"
                     name="select-hotel"
-                    defaultChecked={selectedBookingValues.hotelValue}
+                    checked={selectedBookingValues.hotelValue}
                     onChange={() => {
                       dispatch({
                         type: 'MODIFY_BOOKING_TO_API',
@@ -135,29 +149,8 @@ export default function AdminBookingModal() {
         </div>
         {/* <div className="admin-booking__book__form__message">{bookingMessage}</div> */}
         <div className="admin-booking-modal__book__form__total-submit">
-          <div className="total">
-            {priceList.map((price) => {
-              if (
-                selectedBookingValues.hotelValue === price.hotel &&
-                parseInt(selectedBookingValues.durationValue) === price.duration
-              ) {
-                {
-                  /* {dispatch({
-                    type: 'MODIFY_BOOKING_TO_API',
-                    payload: {
-                      id: selectedBookingValues.booking_id,
-                      totalValue: price.price * selectedBookingValues.ticketValue,
-                    },
-                  });} */
-                }
-
-                return (
-                  <div key={price.id}>
-                    Total: {price.price * selectedBookingValues.ticketValue} €
-                  </div>
-                );
-              }
-            })}
+          <div className="admin-booking-modal__book__form__total-submit__total">
+            Total: {inputValue.totalValue} €
           </div>
         </div>
       </form>

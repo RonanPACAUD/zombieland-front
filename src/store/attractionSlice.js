@@ -1,12 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
+  settings: {
+    name: '',
+    description: '',
+    category_id: 0,
+    message: '',
+  },
   attractionsList: [],
   selected: {
     attraction_id: 0,
     name: '',
     description: '',
     category_id: 0,
+    tags: [],
+    pictures: [],
   },
 };
 
@@ -14,6 +22,16 @@ const attractionSlice = createSlice({
   name: 'attraction',
   initialState,
   reducers: {
+    changeInputValue: (state, action) => {
+      return {
+        ...state,
+        settings: {
+          ...state.settings,
+          ...action.payload,
+        },
+      };
+    },
+
     updateAttractionList: (state, action) => {
       return {
         ...state,
@@ -29,14 +47,33 @@ const attractionSlice = createSlice({
           attraction_id: action.payload.id,
           name: action.payload.name,
           description: action.payload.description,
-          hotelValue: action.payload.hotel,
-          category_id: action.payload.category_id
+          category_id: action.payload.category_id,
+          tags: action.payload.tags,
+          pictures: action.payload.pictures,
         },
       };
-    }
+    },
+
+    resetAttractionState: (state) => {
+      return {
+        ...state,
+        settings: {
+          ...state.settings,
+          name: '',
+          description: '',
+          category_id: 0,
+          message: '',
+        },
+      };
+    },
   },
 });
 
-export const { updateAttractionList, updateSelectedAttraction } = attractionSlice.actions;
+export const {
+  updateAttractionList,
+  updateSelectedAttraction,
+  changeInputValue,
+  resetAttractionState,
+} = attractionSlice.actions;
 
 export default attractionSlice.reducer;

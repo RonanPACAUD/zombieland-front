@@ -27,63 +27,13 @@ const bookingSlice = createSlice({
   name: 'booking',
   initialState,
   reducers: {
-    changeStartDateValue: (state, action) => {
+    changeInputValue: (state, action) => {
+      console.log(action.payload)
       return {
         ...state,
         settings: {
           ...state.settings,
-          startDateValue: action.payload,
-          message: '',
-        },
-      };
-    },
-
-    changeDurationValue: (state, action) => {
-      return {
-        ...state,
-        settings: {
-          ...state.settings,
-          durationValue: action.payload,
-        },
-      };
-    },
-    changeHotelValue: (state, action) => {
-      return {
-        ...state,
-        settings: {
-          ...state.settings,
-          hotelValue: action.payload,
-        },
-      };
-    },
-
-    changeTicketValue: (state, action) => {
-      return {
-        ...state,
-        settings: {
-          ...state.settings,
-          ticketValue: action.payload,
-        },
-      };
-    },
-
-    changeTotalValue: (state, action) => {
-      return {
-        ...state,
-        settings: {
-          ...state.settings,
-          totalValue: action.payload,
-        },
-      };
-    },
-
-    changeMessageValue: (state, action) => {
-      console.log(action.payload);
-      return {
-        ...state,
-        settings: {
-          ...state.settings,
-          message: action.payload,
+          ...action.payload,
         },
       };
     },
@@ -121,6 +71,7 @@ const bookingSlice = createSlice({
           ticketValue: action.payload.nb_people,
           totalValue: action.payload.total,
           user_id: action.payload.user_id,
+          closed: action.payload.closed,
         },
       };
     },
@@ -128,11 +79,7 @@ const bookingSlice = createSlice({
 });
 
 export const {
-  changeStartDateValue,
-  changeDurationValue,
-  changeHotelValue,
-  changeTicketValue,
-  changeTotalValue,
+  changeInputValue,
   changeMessageValue,
   updateBookingsList,
   resetBookingState,

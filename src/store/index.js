@@ -13,8 +13,13 @@ import inscriptionReducers from './inscriptionSlice';
 import inscriptionMiddleware from './InscriptionMiddleware';
 import connexionReducers from './connexionSlice';
 import connexionMiddleware from './connexionMiddleware';
-import categoryReducers from './categorySlice'
+import categoryReducers from './categorySlice';
 import categoryMiddleware from './categoryMiddleware';
+import tagReducers from './tagSlice';
+import tagMiddleware from './tagMiddleware';
+import userReducers from './userSlice';
+import userMiddleware from './userMiddleware';
+import pictureMiddleware from './pictureMiddleware';
 
 const store = configureStore({
   reducer: {
@@ -26,9 +31,12 @@ const store = configureStore({
     inscription: inscriptionReducers,
     connexion: connexionReducers,
     category: categoryReducers,
+    tag: tagReducers,
+    user: userReducers,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(
+    getDefaultMiddleware({
+      serializableCheck: false}).concat(
       attractionMiddleware,
       priceMiddleware,
       bookingMiddleware,
@@ -36,7 +44,12 @@ const store = configureStore({
       inscriptionMiddleware,
       connexionMiddleware,
       categoryMiddleware,
+      tagMiddleware,
+      userMiddleware,
+      pictureMiddleware,
     ),
 });
+
+
 
 export default store;

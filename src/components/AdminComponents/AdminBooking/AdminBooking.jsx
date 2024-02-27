@@ -11,7 +11,7 @@ export default function AdminBookings() {
 
   useEffect(() => {
     dispatch({ type: 'GET_ALL_BOOKINGS' });
-  }, [bookingsList]);
+  }, []);
 
   return (
     <div className="admin-booking">

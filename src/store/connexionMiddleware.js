@@ -1,4 +1,7 @@
-import { changeMessageValue } from './connexionSlice';
+import { changeMessageValue, resetConnexionState } from './connexionSlice';
+import { resetInscriptionState } from './inscriptionSlice';
+import { toogleMainModal } from './modalSlice';
+import { updateConnectedUser } from './userSlice';
 
 const connexionMiddleware = (store) => (next) => (action) => {
   const state = store.getState();
@@ -8,6 +11,7 @@ const connexionMiddleware = (store) => (next) => (action) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: localStorage.getItem('token'),
       },
       body: JSON.stringify({
         email: state.connexion.settings.emailValue,
@@ -16,8 +20,41 @@ const connexionMiddleware = (store) => (next) => (action) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        console.log(data)
         store.dispatch(changeMessageValue(data.message));
+        if (data.token) {
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('connectedUser', JSON.stringify(data.userSafe));
+          store.dispatch(updateConnectedUser(data.userSafe));
+          store.dispatch(toogleMainModal());
+          store.dispatch(resetConnexionState());
+        }
+      });
+  }
+
+  if (action.type === 'POST_CONNEXION_DATA_TO_API_FROM_INSCRIPTION') {
+    fetch('http://localhost:3000/signin', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: localStorage.getItem('token'),
+      },
+      body: JSON.stringify({
+        email: state.inscription.settings.emailValue,
+        password: state.inscription.settings.passwordValue,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        store.dispatch(changeMessageValue(data.message));
+        if (data.token) {
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('connectedUser', JSON.stringify(data.userSafe));
+          store.dispatch(updateConnectedUser(data.userSafe));
+          store.dispatch(toogleMainModal());
+          store.dispatch(resetInscriptionState());
+
+        }
       });
   }
 

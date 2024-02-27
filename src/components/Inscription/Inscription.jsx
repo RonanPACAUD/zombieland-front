@@ -2,47 +2,14 @@ import './Inscription.scss';
 
 import { useDispatch, useSelector } from 'react-redux';
 import underline from '../../assets/underline/dual-underline.png';
-import {
-  changeAddressValue,
-  changeCityValue,
-  changeConfirmPasswordValue,
-  changeCountryValue,
-  changeEmailValue,
-  changeFirstNameValue,
-  changeLastNameValue,
-  changePasswordValue,
-} from '../../store/inscriptionSlice';
+import { changeInputValue } from '../../store/inscriptionSlice';
 
 export default function Inscription() {
   const dispatch = useDispatch();
 
-  const firstNameValue = useSelector(
-    (state) => state.inscription.settings.firstNameValue
-  );
-  const lastNameValue = useSelector(
-    (state) => state.inscription.settings.lastNameValue
-  );
-  const emailValue = useSelector(
-    (state) => state.inscription.settings.emailValue
-  );
-  const addressValue = useSelector(
-    (state) => state.inscription.settings.addressValue
-  );
-  const cityValue = useSelector(
-    (state) => state.inscription.settings.cityValue
-  );
-  const countryValue = useSelector(
-    (state) => state.inscription.settings.countryValue
-  );
-  const passwordValue = useSelector(
-    (state) => state.inscription.settings.passwordValue
-  );
-  const confirmPasswordValue = useSelector(
-    (state) => state.inscription.settings.confirmPasswordValue
-  );
-  const inscriptionMessage = useSelector(
-    (state) => state.inscription.settings.message
-  );
+  const inputValue = useSelector((state) => state.inscription.settings);
+
+  console.log(inputValue);
 
   return (
     <div className="inscription">
@@ -63,9 +30,9 @@ export default function Inscription() {
               className="inscription__form__input-container__first-column__input-first-name"
               placeholder="ex: Jean-Claude"
               maxLength="64"
-              value={firstNameValue}
+              value={inputValue.firstNameValue}
               onChange={(e) => {
-                dispatch(changeFirstNameValue(e.target.value));
+                dispatch(changeInputValue({ firstNameValue: e.target.value }));
               }}
             />
             <h3>Nom</h3>
@@ -74,9 +41,9 @@ export default function Inscription() {
               className="inscription__form__input-container__first-column__input-last-name"
               placeholder="ex: Dupont"
               maxLength="64"
-              value={lastNameValue}
+              value={inputValue.lastNameValue}
               onChange={(e) => {
-                dispatch(changeLastNameValue(e.target.value));
+                dispatch(changeInputValue({ lastNameValue: e.target.value }));
               }}
             />
             <h3>Email</h3>
@@ -85,9 +52,9 @@ export default function Inscription() {
               className="inscription__form__input-container__first-column__input-email"
               placeholder="exemple@exemplemail.com"
               maxLength="255"
-              value={emailValue}
+              value={inputValue.emailValue}
               onChange={(e) => {
-                dispatch(changeEmailValue(e.target.value));
+                dispatch(changeInputValue({ emailValue: e.target.value }));
               }}
             />
             <h3>Adresse</h3>
@@ -96,9 +63,9 @@ export default function Inscription() {
               className="inscription__form__input-container__first-column__input-address"
               placeholder="ex: 12 rue de la forêt"
               maxLength="255"
-              value={addressValue}
+              value={inputValue.addressValue}
               onChange={(e) => {
-                dispatch(changeAddressValue(e.target.value));
+                dispatch(changeInputValue({ addressValue: e.target.value }));
               }}
             />
           </div>
@@ -109,9 +76,9 @@ export default function Inscription() {
               className="inscription__form__input-container__second-column__input-city"
               placeholder="ex: Paris"
               maxLength="64"
-              value={cityValue}
+              value={inputValue.cityValue}
               onChange={(e) => {
-                dispatch(changeCityValue(e.target.value));
+                dispatch(changeInputValue({ cityValue: e.target.value }));
               }}
             />
             <h3>Pays</h3>
@@ -120,9 +87,9 @@ export default function Inscription() {
               className="inscription__form__input-container__second-column__input-country"
               placeholder="ex: France"
               maxLength="64"
-              value={countryValue}
+              value={inputValue.countryValue}
               onChange={(e) => {
-                dispatch(changeCountryValue(e.target.value));
+                dispatch(changeInputValue({ countryValue: e.target.value }));
               }}
             />
             <h3>Mot de passe</h3>
@@ -131,9 +98,9 @@ export default function Inscription() {
               className="inscription__form__input-container__second-column__input-email"
               placeholder="min 8, 1 nombre, 1 min, 1 Maj, 1 symbol"
               maxLength="30"
-              value={passwordValue}
+              value={inputValue.passwordValue}
               onChange={(e) => {
-                dispatch(changePasswordValue(e.target.value));
+                dispatch(changeInputValue({ passwordValue: e.target.value }));
               }}
             />
             <h3>Confirmation mot de passe</h3>
@@ -142,14 +109,16 @@ export default function Inscription() {
               className="inscription__form__input-container__second-column__input-email"
               placeholder="Confirmation du mot de passe"
               maxLength="30"
-              value={confirmPasswordValue}
+              value={inputValue.confirmPasswordValue}
               onChange={(e) => {
-                dispatch(changeConfirmPasswordValue(e.target.value));
+                dispatch(
+                  changeInputValue({ confirmPasswordValue: e.target.value })
+                );
               }}
             />
           </div>
         </div>
-        <div className="inscription__form__message">{inscriptionMessage}</div>
+        <div className="inscription__form__message">{inputValue.message}</div>
         <div className="inscription__form__button-container">
           <button
             type="submit"

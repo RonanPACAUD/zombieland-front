@@ -2,7 +2,7 @@ import './Connexion.scss';
 
 import { useDispatch, useSelector } from 'react-redux';
 import underline from '../../assets/underline/dual-underline.png';
-import { showInscriptionModal } from '../../store/modalSlice';
+import { showInscriptionModal, toogleMainModal } from '../../store/modalSlice';
 import {
   changeEmailValue,
   changePasswordValue,

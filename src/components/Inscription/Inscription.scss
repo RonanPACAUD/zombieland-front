@@ -61,3 +61,17 @@
     color: v.$clr-primary;
     margin: 0.8rem 0 0.5rem 0;
 }
+
+@media (max-width: 800px) {
+    .inscription {
+        &__form {
+            &__input-container {
+                flex-direction: column;
+
+                &__first-column {
+                    margin-right: 0;
+                }
+            }
+        }
+    }
+}

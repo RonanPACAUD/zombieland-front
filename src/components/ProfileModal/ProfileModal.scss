@@ -1,0 +1,38 @@
+@use '@scssVariables' as v;
+
+.profil-modal {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 2rem 2rem 2rem;
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        &__input-container {
+            display: flex;
+            margin-top: 2rem;
+
+            &__first-column {
+                margin-right: 4rem;
+            }
+        }
+
+        &__input-container {
+            text-align: left;
+        }
+    }
+}
+
+.profil-modal h2 {
+    margin: 0;
+}
+
+.profil-modal h3 {
+    color: v.$clr-primary;
+    margin: 0.8rem 0 0.5rem 0;
+}

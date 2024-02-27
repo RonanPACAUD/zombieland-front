@@ -4,16 +4,19 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 5.5rem 0 0 0;
   text-align: center;
+  padding: 0 5%;
 
   &__list-container {
+    max-width: 1000px;
+    width: 100%;
+    margin: 3rem 0 5rem 0;
 
     &__item {
       display: flex;
+      justify-content: space-between;
       padding: 1rem 2rem;
-      margin: 0.5rem;
-      width: fit-content;
+      margin: 0.5rem 0;
       background-color: v.$clr-light-dark;
       text-align: left;
       position: relative;
@@ -28,9 +31,12 @@
         top: 0;
       }
 
+      &__user {
+        width: 25rem;
+      }
+
       &__message {
-        margin: 0 3rem;
-        width: 40rem;
+        width: 100%;
       }
 
       &__message * {
@@ -46,19 +52,72 @@
         flex-direction: column;
 
         &__classified {
-            z-index: 10;
-          }
+          z-index: 10;
+        }
       }
 
       &__buttons * {
         background-color: v.$clr-primary;
-        height: 3rem;
-        margin: 0.5rem;
-        width: 6rem;
+        height: 2rem;
+        margin: 0.25rem;
+        width: 5rem;
         display: flex;
         justify-content: center;
         align-items: center;
         cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      &__buttons *:hover {
+        background-color: v.$clr-primary-hover;
+        transition: background-color 0.2s ease;
+      }
+    }
+  }
+}
+
+@media (max-width: 830px) {
+  .admin-message {
+    &__list-container {
+      width: 80%;
+    }
+  }
+}
+
+@media (max-width: 750px) {
+  .admin-message {
+    &__list-container {
+      width: 25rem;
+
+      &__item {
+        flex-direction: column;
+        padding: 2rem;
+
+        &__user {
+          text-align: center;
+          width: 100%;
+          margin-bottom: 2rem;
+        }
+
+        &__buttons {
+          flex-direction: row;
+          justify-content: center;
+          margin-left: 0;
+          margin-top: 2rem;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .admin-message {
+    &__list-container {
+      width: 100%;
+
+      &__item {
+        margin: 0.5rem 0;
+        padding: 1rem;
       }
     }
   }

@@ -1,4 +1,5 @@
 import {
+  changeInputValue,
   changeMessageValue,
   resetBookingState,
   updateBookingsList,
@@ -9,7 +10,11 @@ const bookingMiddleware = (store) => (next) => (action) => {
   const state = store.getState();
 
   if (action.type === 'GET_ALL_BOOKINGS') {
-    fetch('http://localhost:3000/booking')
+    fetch('http://localhost:3000/booking', {
+      headers: {
+        Authorization: localStorage.getItem('token'),
+      },
+    })
       .then((response) => response.json())
       .then((data) => {
         store.dispatch(updateBookingsList(data));
@@ -17,9 +22,14 @@ const bookingMiddleware = (store) => (next) => (action) => {
   }
 
   if (action.type === 'GET_ONE_BOOKING') {
-    fetch(`http://localhost:3000/booking/${action.payload}`)
+    fetch(`http://localhost:3000/booking/${action.payload}`, {
+      headers: {
+        Authorization: localStorage.getItem('token'),
+      },
+    })
       .then((response) => response.json())
       .then((data) => {
+        console.log(data)
         store.dispatch(updateSelectedBooking(data));
       });
   }
@@ -29,6 +39,8 @@ const bookingMiddleware = (store) => (next) => (action) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: localStorage.getItem('token'),
+
       },
       body: JSON.stringify({
         start_date: state.booking.settings.startDateValue,
@@ -36,21 +48,28 @@ const bookingMiddleware = (store) => (next) => (action) => {
         nb_people: state.booking.settings.ticketValue,
         hotel: state.booking.settings.hotelValue,
         total: state.booking.settings.totalValue,
-        user_id: state.booking.settings.user_id,
+        user_id: action.payload,
       }),
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (response.status === 200) {
+          store.dispatch(resetBookingState());
+        }
+        return response.json()
+      })
       .then((data) => {
-        store.dispatch(changeMessageValue(data.message));
-        store.dispatch(resetBookingState());
+        store.dispatch(changeInputValue({message: data.message}));
       });
   }
 
   if (action.type === 'MODIFY_BOOKING_TO_API') {
+    console.log(action.payload)
+
     fetch(`http://localhost:3000/booking/${action.payload.id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: localStorage.getItem('token'),
       },
       body: JSON.stringify({
         start_date: action.payload.start_date,
@@ -63,7 +82,9 @@ const bookingMiddleware = (store) => (next) => (action) => {
     })
       .then((response) => response.json())
       .then((data) => {
+        console.log(data)
         store.dispatch(updateSelectedBooking(data));
+        store.dispatch({ type: 'GET_ALL_BOOKINGS' });
       });
   }
 
@@ -72,11 +93,11 @@ const bookingMiddleware = (store) => (next) => (action) => {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: localStorage.getItem('token'),
       },
     })
       .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
+      .then(() => {
         store.dispatch({ type: 'GET_ALL_BOOKINGS' });
       });
   }

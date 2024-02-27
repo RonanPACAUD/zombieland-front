@@ -23,34 +23,26 @@ const messageSlice = createSlice({
   name: 'message',
   initialState,
   reducers: {
-    changeSubjectValue: (state, action) => {
+    changeInputValue: (state, action) => {
       return {
         ...state,
         settings: {
           ...state.settings,
-          subjectValue: action.payload,
-          message: '',
+          ...action.payload,
         },
       };
     },
 
-    changeContentValue: (state, action) => {
+    resetMessageState: (state) => {
       return {
         ...state,
         settings: {
           ...state.settings,
-          contentValue: action.payload,
+          subjectValue: '',
+          contentValue: '',
+          sender_id: 1,
+          receiver_id: 2,
           message: '',
-        },
-      };
-    },
-
-    changeMessageValue: (state, action) => {
-      return {
-        ...state,
-        settings: {
-          ...state.settings,
-          message: action.payload,
         },
       };
     },
@@ -65,10 +57,9 @@ const messageSlice = createSlice({
 });
 
 export const {
-  changeSubjectValue,
-  changeContentValue,
-  changeMessageValue,
+  changeInputValue,
   updateMessagesList,
+  resetMessageState,
 } = messageSlice.actions;
 
 export default messageSlice.reducer;

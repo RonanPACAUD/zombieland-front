@@ -1,10 +1,14 @@
-import { changeMessageValue, updateMessagesList } from './messageSlice';
+import { changeInputValue, resetMessageState, updateMessagesList } from './messageSlice';
 
 const messageMiddleware = (store) => (next) => (action) => {
   const state = store.getState();
 
   if (action.type === 'GET_ALL_MESSAGES') {
-    fetch('http://localhost:3000/message')
+    fetch('http://localhost:3000/message', {
+      headers: {
+        Authorization: localStorage.getItem('token'),
+      },
+    })
       .then((response) => response.json())
       .then((data) => {
         store.dispatch(updateMessagesList(data));
@@ -12,6 +16,7 @@ const messageMiddleware = (store) => (next) => (action) => {
   }
 
   if (action.type === 'POST_NEW_MESSAGE_TO_API') {
+    console.log(action.payload)
     fetch('http://localhost:3000/message', {
       method: 'POST',
       headers: {
@@ -20,13 +25,17 @@ const messageMiddleware = (store) => (next) => (action) => {
       body: JSON.stringify({
         subject: state.message.settings.subjectValue,
         content: state.message.settings.contentValue,
-        sender_id: state.message.settings.sender_id,
+        sender_id: action.payload,
         receiver_id: state.message.settings.receiver_id,
       }),
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (response.status === 200) {
+          store.dispatch(resetMessageState())
+        }
+        return response.json()})
       .then((data) => {
-        store.dispatch(changeMessageValue(data.message));
+        store.dispatch(changeInputValue({message: data.message}));
       });
   }
 
@@ -37,6 +46,7 @@ const messageMiddleware = (store) => (next) => (action) => {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: localStorage.getItem('token'),
       },
       body: JSON.stringify({
         closed: action.payload.closed,
@@ -45,7 +55,7 @@ const messageMiddleware = (store) => (next) => (action) => {
       .then((response) => response.json())
       .then((data) => {
         console.log(data)
-        // store.dispatch(updateSelectedBooking(data));
+        store.dispatch({ type: 'GET_ALL_MESSAGES'});
       });
   }
 
@@ -54,6 +64,7 @@ const messageMiddleware = (store) => (next) => (action) => {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: localStorage.getItem('token'),
       },
     })
       .then((response) => response.json())

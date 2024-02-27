@@ -6,6 +6,9 @@ const initialState = {
   inscriptionModalIsOpen: false,
   adminBookingModal: false,
   adminAttractionModal: false,
+  adminUserModal: false,
+  modifyProfilModal: false,
+  burgerMenuIsOpen: false,
 };
 
 const modalSlice = createSlice({
@@ -20,6 +23,8 @@ const modalSlice = createSlice({
         inscriptionModalIsOpen: false,
         adminBookingModal: false,
         adminAttractionModal: false,
+        adminUserModal: false,
+        modifyProfilModal: false,
       };
     },
 
@@ -30,6 +35,8 @@ const modalSlice = createSlice({
         inscriptionModalIsOpen: true,
         adminBookingModal: false,
         adminAttractionModal: false,
+        adminUserModal: false,
+        modifyProfilModal: false,
       };
     },
 
@@ -41,6 +48,8 @@ const modalSlice = createSlice({
         inscriptionModalIsOpen: false,
         adminBookingModal: true,
         adminAttractionModal: false,
+        adminUserModal: false,
+        modifyProfilModal: false,
       };
     },
 
@@ -52,12 +61,54 @@ const modalSlice = createSlice({
         inscriptionModalIsOpen: false,
         adminBookingModal: false,
         adminAttractionModal: true,
+        adminUserModal: false,
+        modifyProfilModal: false,
       };
     },
+
+    showAdminUserModal: (state) => {
+      return {
+        ...state,
+        mainModalIsOpen: !state.mainModalIsOpen,
+        connexionModalIsOpen: false,
+        inscriptionModalIsOpen: false,
+        adminBookingModal: false,
+        adminAttractionModal: false,
+        adminUserModal: true,
+        modifyProfilModal: false,
+      };
+    },
+
+    showModifyProfilModal: (state) => {
+      return {
+        ...state,
+        mainModalIsOpen: !state.mainModalIsOpen,
+        connexionModalIsOpen: false,
+        inscriptionModalIsOpen: false,
+        adminBookingModal: false,
+        adminAttractionModal: false,
+        adminUserModal: false,
+        modifyProfilModal: true,
+      };
+    },
+
+    toogleBurgerMenu: (state) => {
+      return {
+        ...state,
+        burgerMenuIsOpen: !state.burgerMenuIsOpen
+      }
+    }
   },
 });
 
-export const { toogleMainModal, showInscriptionModal, showAdminBookingModal, showAdminAttractionModal } =
-  modalSlice.actions;
+export const {
+  toogleMainModal,
+  showInscriptionModal,
+  showAdminBookingModal,
+  showAdminAttractionModal,
+  showAdminUserModal,
+  showModifyProfilModal,
+  toogleBurgerMenu,
+} = modalSlice.actions;
 
 export default modalSlice.reducer;
