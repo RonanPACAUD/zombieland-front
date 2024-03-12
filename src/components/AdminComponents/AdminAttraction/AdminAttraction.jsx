@@ -57,8 +57,8 @@ export default function AdminAttraction() {
                   ))}
                 </div>
               </div>
-              <div className="admin-attraction__list-container__item__middle-container">
-                <div className="admin-attraction__list-container__item__middle-container__pictures">
+              <div className="admin-attraction__list-container__item__right-container">
+                <div className="admin-attraction__list-container__item__right-container__pictures">
                   {attraction.pictures.map((picture) => (
                     <img
                       key={picture.id}
@@ -66,8 +66,6 @@ export default function AdminAttraction() {
                     />
                   ))}
                 </div>
-              </div>
-              <div className="admin-attraction__list-container__item__right-container">
                 <div className="admin-attraction__list-container__item__right-container__buttons">
                   <button
                     className=""

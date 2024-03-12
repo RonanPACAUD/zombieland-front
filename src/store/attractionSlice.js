@@ -16,6 +16,10 @@ const initialState = {
     tags: [],
     pictures: [],
   },
+  filter: {
+    category_id: '',
+    tag_search: '',
+  }
 };
 
 const attractionSlice = createSlice({
@@ -27,6 +31,16 @@ const attractionSlice = createSlice({
         ...state,
         settings: {
           ...state.settings,
+          ...action.payload,
+        },
+      };
+    },
+
+    changeFilterValue: (state, action) => {
+      return {
+        ...state,
+        filter: {
+          ...state.filter,
           ...action.payload,
         },
       };
@@ -73,6 +87,7 @@ export const {
   updateAttractionList,
   updateSelectedAttraction,
   changeInputValue,
+  changeFilterValue,
   resetAttractionState,
 } = attractionSlice.actions;
 

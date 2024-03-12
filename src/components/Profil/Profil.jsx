@@ -3,7 +3,7 @@ import './Profil.scss';
 import profilPicture from '../../assets/profil-assets/Firefly détaillé parc attraction restaurant fast food rouge brume orageux sombre vue exterieure mont (2).jpg';
 import underline from '../../assets/underline/dual-underline.png';
 import { useSelector } from 'react-redux';
-import { showModifyProfilModal } from '../../store/modalSlice';
+import { showModifyProfilModal, showResetPasswordModal } from '../../store/modalSlice';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 
@@ -61,10 +61,8 @@ export default function Profil() {
           <div className="profil__list-container__item__buttons-container__expiration-message">
             Vous ne pouvez plus annuler la réservation
           </div>
-          <button
-            className="profil__list-container__item__buttons-container__button"
-          >
-          <div className="profil__list-container__item__buttons-container__expiration-block"></div>
+          <button className="profil__list-container__item__buttons-container__button">
+            <div className="profil__list-container__item__buttons-container__expiration-block"></div>
             Annuler
           </button>
         </>
@@ -126,9 +124,14 @@ export default function Profil() {
           >
             Modifier mon profil
           </button>
-          {/* <button className="profil__main__option-container__option-button">
+          <button
+            className="profil__main__option-container__option-button"
+            onClick={() => {
+              dispatch(showResetPasswordModal())
+            }}
+          >
             Modifier mon mot de passe
-          </button> */}
+          </button>
         </div>
         <h2>Mes réservations</h2>
         <p>

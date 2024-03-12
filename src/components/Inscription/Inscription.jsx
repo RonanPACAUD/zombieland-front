@@ -9,8 +9,6 @@ export default function Inscription() {
 
   const inputValue = useSelector((state) => state.inscription.settings);
 
-  console.log(inputValue);
-
   return (
     <div className="inscription">
       <h1>Inscription</h1>

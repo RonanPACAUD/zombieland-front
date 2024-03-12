@@ -1,4 +1,4 @@
-import { changeMessageValue, resetConnexionState } from './connexionSlice';
+import { changeInputValue, resetConnexionState } from './connexionSlice';
 import { resetInscriptionState } from './inscriptionSlice';
 import { toogleMainModal } from './modalSlice';
 import { updateConnectedUser } from './userSlice';
@@ -21,7 +21,7 @@ const connexionMiddleware = (store) => (next) => (action) => {
       .then((response) => response.json())
       .then((data) => {
         console.log(data)
-        store.dispatch(changeMessageValue(data.message));
+        store.dispatch(changeInputValue({message: data.message}));
         if (data.token) {
           localStorage.setItem('token', data.token);
           localStorage.setItem('connectedUser', JSON.stringify(data.userSafe));
@@ -46,7 +46,7 @@ const connexionMiddleware = (store) => (next) => (action) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        store.dispatch(changeMessageValue(data.message));
+        store.dispatch(changeInputValue({message: data.message}));
         if (data.token) {
           localStorage.setItem('token', data.token);
           localStorage.setItem('connectedUser', JSON.stringify(data.userSafe));

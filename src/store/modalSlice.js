@@ -8,6 +8,7 @@ const initialState = {
   adminAttractionModal: false,
   adminUserModal: false,
   modifyProfilModal: false,
+  resetPasswordModal: false,
   burgerMenuIsOpen: false,
 };
 
@@ -25,6 +26,7 @@ const modalSlice = createSlice({
         adminAttractionModal: false,
         adminUserModal: false,
         modifyProfilModal: false,
+        resetPasswordModal: false,
       };
     },
 
@@ -37,6 +39,7 @@ const modalSlice = createSlice({
         adminAttractionModal: false,
         adminUserModal: false,
         modifyProfilModal: false,
+        resetPasswordModal: false,
       };
     },
 
@@ -50,6 +53,7 @@ const modalSlice = createSlice({
         adminAttractionModal: false,
         adminUserModal: false,
         modifyProfilModal: false,
+        resetPasswordModal: false,
       };
     },
 
@@ -63,6 +67,7 @@ const modalSlice = createSlice({
         adminAttractionModal: true,
         adminUserModal: false,
         modifyProfilModal: false,
+        resetPasswordModal: false,
       };
     },
 
@@ -76,6 +81,7 @@ const modalSlice = createSlice({
         adminAttractionModal: false,
         adminUserModal: true,
         modifyProfilModal: false,
+        resetPasswordModal: false,
       };
     },
 
@@ -89,6 +95,21 @@ const modalSlice = createSlice({
         adminAttractionModal: false,
         adminUserModal: false,
         modifyProfilModal: true,
+        resetPasswordModal: false,
+      };
+    },
+
+    showResetPasswordModal: (state) => {
+      return {
+        ...state,
+        mainModalIsOpen: !state.mainModalIsOpen,
+        connexionModalIsOpen: false,
+        inscriptionModalIsOpen: false,
+        adminBookingModal: false,
+        adminAttractionModal: false,
+        adminUserModal: false,
+        modifyProfilModal: false,
+        resetPasswordModal: true,
       };
     },
 
@@ -108,6 +129,7 @@ export const {
   showAdminAttractionModal,
   showAdminUserModal,
   showModifyProfilModal,
+  showResetPasswordModal,
   toogleBurgerMenu,
 } = modalSlice.actions;
 

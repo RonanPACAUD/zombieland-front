@@ -12,6 +12,15 @@ const attractionMiddleware = (store) => (next) => (action) => {
       });
   }
 
+  if (action.type === 'GET_FILTER_ATTRACTIONS') {
+    fetch(`http://localhost:3000/attraction-filter?category_id=${state.attraction.filter.category_id}&tag_search=${state.attraction.filter.tag_search}`)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data)
+        store.dispatch(updateAttractionList(data));
+      });
+  }
+
   if (action.type === 'GET_ONE_ATTRACTION') {
     fetch(`http://localhost:3000/attraction/${action.payload}`)
       .then((response) => response.json())

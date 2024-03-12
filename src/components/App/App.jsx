@@ -20,6 +20,7 @@ import AdminTagCategory from '../AdminComponents/AdminTagCategory/AdminTagCatego
 import AdminPrice from '../AdminComponents/AdminPrice/AdminPrice';
 import AdminUser from '../AdminComponents/AdminUser/AdminUser';
 import Profil from '../Profil/Profil';
+
 import { updateConnectedUser } from '../../store/userSlice';
 
 function App() {
@@ -27,22 +28,19 @@ function App() {
 
   const mainModalIsOpen = useSelector((state) => state.modal.mainModalIsOpen);
 
+  const localUser = JSON.parse(localStorage.getItem('connectedUser'));
 
-  const localUser = JSON.parse(localStorage.getItem("connectedUser"))
-
-  
   const currentPage = useLocation();
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [currentPage]);
 
-    useEffect(() => {
-      if (localUser) {
-        dispatch(updateConnectedUser(localUser))
-      }
-      window.scrollTo(0, 0)
-    }, []);
-
+  useEffect(() => {
+    if (localUser) {
+      dispatch(updateConnectedUser(localUser));
+    }
+    window.scrollTo(0, 0);
+  }, []);
 
 
   return (

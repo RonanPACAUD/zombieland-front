@@ -2,24 +2,17 @@ import './Connexion.scss';
 
 import { useDispatch, useSelector } from 'react-redux';
 import underline from '../../assets/underline/dual-underline.png';
-import { showInscriptionModal, toogleMainModal } from '../../store/modalSlice';
+import { showInscriptionModal } from '../../store/modalSlice';
 import {
-  changeEmailValue,
-  changePasswordValue,
+  changeInputValue,
 } from '../../store/connexionSlice';
 
 export default function Connexion() {
   const dispatch = useDispatch();
 
-  const emailValue = useSelector(
-    (state) => state.connexion.settings.emailValue
-  );
-  const passwordValue = useSelector(
-    (state) => state.connexion.settings.passwordValue
-  );
-  const connexionMessage = useSelector(
-    (state) => state.connexion.settings.message
-  );
+  const inputValue = useSelector((state) => state.connexion.settings); 
+
+  console.log(inputValue)
 
   return (
     <div className="connexion">
@@ -37,9 +30,9 @@ export default function Connexion() {
           type="email"
           className="connexion__form__input-email"
           maxLength="255"
-          value={emailValue}
+          value={inputValue.emailValue}
           onChange={(e) => {
-            dispatch(changeEmailValue(e.target.value));
+            dispatch(changeInputValue({emailValue: e.target.value}));
           }}
         />
         <h3>Mot de passe</h3>
@@ -47,12 +40,12 @@ export default function Connexion() {
           type="password"
           className="connexion__form__input-email"
           maxLength="30"
-          value={passwordValue}
+          value={inputValue.passwordValue}
           onChange={(e) => {
-            dispatch(changePasswordValue(e.target.value));
+            dispatch(changeInputValue({passwordValue: e.target.value}));
           }}
         />
-        <div className="connexion__form__message">{connexionMessage}</div>
+        <div className="connexion__form__message">{inputValue.message}</div>
         <div className="connexion__form__button-container">
           <button
             type="submit"

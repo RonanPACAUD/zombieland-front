@@ -21,10 +21,28 @@
     font-size: 1.5rem;
   }
 
+  &__filter-bar form {
+    color: v.$clr-primary;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1300px;
+    width: 100%;
+    margin-top: 4rem;
+  }
+
+  &__filter-bar * {
+    margin: 0 1rem;
+  }
+
   &__list {
     max-width: 1300px;
     width: 100%;
-    margin: 3rem 0 5rem 0;
+    margin-bottom: 5rem;
+  }
+
+  &__null-message {
+    text-align: center;
   }
 }
 
@@ -39,7 +57,6 @@
 @media (max-width: 1200px) {
   .attractions {
     &__main-title {
-
       &__underline {
         width: 27rem;
       }
@@ -71,7 +88,6 @@
   }
 }
 
-
 @media (max-width: 1000px) {
   .attractions {
     &__main-title {
@@ -93,7 +109,6 @@
     }
   }
 }
-
 
 @media (max-width: 500px) {
   .attractions {

@@ -9,6 +9,7 @@ import AdminBookingModal from '../AdminComponents/AdminBookingModal/AdminBooking
 import AdminAttractionModal from '../AdminComponents/AdminAttractionModal/AdminAttractionModal';
 import AdminUserModal from '../AdminComponents/AdminUserModal/AdminUserModal';
 import ProfileModal from '../ProfileModal/ProfileModal';
+import ResetPassword from '../ResetPassword/ResetPassword';
 
 export default function Modal() {
   const dispatch = useDispatch();
@@ -28,7 +29,9 @@ export default function Modal() {
   const adminUserModal = useSelector(
     (state) => state.modal.adminUserModal
   );
-  const modifyProfilModal =useSelector((state) => state.modal.modifyProfilModal);
+  const modifyProfilModal = useSelector((state) => state.modal.modifyProfilModal);
+
+  const resetPasswordModal = useSelector((state) => state.modal.resetPasswordModal);
 
   return (
     <div
@@ -52,6 +55,7 @@ export default function Modal() {
         {adminAttractionModal && <AdminAttractionModal />}
         {adminUserModal && <AdminUserModal />}
         {modifyProfilModal && <ProfileModal />}
+        {resetPasswordModal && <ResetPassword />}
       </div>
     </div>
   );

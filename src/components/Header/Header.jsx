@@ -18,6 +18,8 @@ export default function Header() {
   const connectedUser = useSelector((state) => state.user.connected);
   const burgerMenuIsOpen = useSelector((state) => state.modal.burgerMenuIsOpen);
 
+  console.log(connectedUser)
+
   return (
     <header className="header">
       <div className="header__container">

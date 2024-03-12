@@ -47,7 +47,32 @@ const inscriptionMiddleware = (store) => (next) => (action) => {
       }),
     })
       .then((response) => {
-        if  (response.status === 200) {
+        if (response.status === 200) {
+          store.dispatch(resetInscriptionState());
+        }
+        return response.json();
+      })
+      .then((data) => {
+        store.dispatch(changeInputValue({ message: data.message }));
+      });
+  }
+
+  if (action.type === 'POST_RESET_PASSWORD_DATA_TO_API') {
+    fetch('http://localhost:3000/reset', {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: localStorage.getItem('token'),
+      },
+      body: JSON.stringify({
+        email: JSON.parse(localStorage.getItem('connectedUser')).email,
+        password: state.inscription.settings.passwordValue,
+        new_password: state.inscription.settings.newPasswordValue,
+        confirm_password: state.inscription.settings.confirmPasswordValue,
+      }),
+    })
+      .then((response) => {
+        if (response.status === 200) {
           store.dispatch(resetInscriptionState());
         }
         return response.json()})

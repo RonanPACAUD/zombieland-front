@@ -34,7 +34,7 @@ export default function Bookings() {
 
   useEffect(() => {
     calculTotal();
-  }, [inputValue.durationValue, inputValue.hotelValue, inputValue.ticketValue]);
+  }, [inputValue.durationValue, inputValue.hotelValue, inputValue.ticketValue, inputValue.startDateValue]);
 
   function calculTotal() {
     priceList.forEach((price) => {

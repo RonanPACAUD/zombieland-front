@@ -1,18 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  connected: {
-    id: 0,
-    first_name: '',
-    last_name: '',
-    address: '',
-    city: '',
-    country: '',
-    email: '',
-    role: '',
-    connected: false,
-    bookings: '',
-  },
+  connected: '',
   userLIst: [],
   selectedUser: {
     id: 0,
@@ -73,9 +62,13 @@ const userSlice = createSlice({
       };
     },
 
-    resetConnectedUser: () => {
+    resetConnectedUser: (state) => {
       localStorage.clear();
-      return {}
+
+      return {
+        ...state,
+        connected: ''
+      }
     },
   },
 });

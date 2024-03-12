@@ -25,7 +25,10 @@ export default function AdminBookingModal() {
     selectedBookingValues.durationValue,
     selectedBookingValues.hotelValue,
     selectedBookingValues.ticketValue,
+    selectedBookingValues.startDateValue
   ]);
+
+  console.log(selectedBookingValues.startDateValue)
 
   function calculTotal() {
     priceList.forEach((price) => {
